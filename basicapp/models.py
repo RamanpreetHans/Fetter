@@ -52,7 +52,7 @@ class Newsfeed(models.Model):
     news_feed_type =  models.CharField(max_length=100,choices=CATEGORY_CHOICES,default='other')
     date =  models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=2000)
-    image = models.CharField(max_length=100)
+    image = models.ImageField(null=True,blank=True)
     intended_for = models.CharField(max_length=50, choices=ACCESS_CATEGORY, default='all')
 
     def __str__(self):
@@ -109,6 +109,9 @@ class Internship(models.Model):
     upload_date =  models.CharField(max_length=50)
     expir_date =  models.CharField(max_length=50)
     description =  models.CharField(max_length=1000)
+
+    def __str__(self):
+        return "%s (%s)" %(self.user_name,self.info)  
 
 class Project(models.Model):
     user_name = models.ForeignKey(User,  on_delete=models.PROTECT)
