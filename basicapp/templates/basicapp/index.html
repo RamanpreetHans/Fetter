@@ -88,12 +88,12 @@
 				<!-- Blue Color ends -->
 				<center>
 					<div class="profileImageBlock">
-						 <img src="{{ user.profile_pic_path }}" class="profileImage">
+						 <img src="/media/user/profile_image/734.jpg" class="profileImage">
 						<!--<img src="{% static 'Images/maleIcon.png' %}" class="profileImage"> -->
 					</div>
 					<div class="profileBlockUsername">
 						{% for user in user_record %}
-              {{ user.first_name }} {{user.last_name}}
+              <a href="/basicapp/accountInfo/">{{ user.first_name }} {{user.last_name}}</a>
 					</div>
           <br>
 					<div class="profileBlockInstituteName">
@@ -145,7 +145,7 @@
 				<li>
 					<div style="width:100%;padding:10px;border: 0px solid black;background-color: white;box-shadow: 0px 0px 0px 0px;">
             <a href="{% url 'basicapp:addnewsfeed' %}">
-              <button style="width:100%;border:1px solid black;background-color:lightblue;height:40px;">Add Post</button>
+              <button style="width:100%;border:1px solid black;background-color:lightblue;height:40px;">Create Post</button>
             </a>
 					</div>
 					<br>
@@ -158,10 +158,10 @@
               <!-- Profile Pic, username, Institue name -->
               <div class="newsfeedUserDetail" style="width:100%;background-color:white">
                 <div class="newsfeedUploadedByImage">
-                  <img src="{% static 'Images/maleIcon.png' %}" style="width:70px;height: 70px;">
+                  <img src="/media/user/profile_image/734.jpg" style="width:70px;height: 70px;">
                 </div>
                 <span class="newsfeedUploadedBy">
-                  {{ feed.user_name }}
+                  <a href="/basicapp/accountInfo/">{{ feed.user_name }}</a>
                 <br>
               </span>
                 <span class="newsfeedUploadedByInstituteName">
@@ -171,6 +171,14 @@
                 <span class="newsfeedContentUploadDate">
                   {{ feed.date }}
                 </span>
+                <br>
+                <span class="newsfeedUploadedBy">
+                  <img width="500" height="400"src="/media/{{ feed.image }}">
+                <br>
+              </span>
+              <a href="/index/{{feed.id}}/comment/"><button class="button">Comment</button></a>	
+              
+
               </div>
             </div>
 						<hr>
@@ -462,7 +470,7 @@
 		</div>
 		<!-- Right Section Overlapping 1 ends -->
 		</div>
-		<!-- Container (Envelope) ends -->
+		<!-- Container (Envelope) ends --> 
 
 	</body>
 
