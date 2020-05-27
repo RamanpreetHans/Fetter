@@ -57,7 +57,7 @@ def user_login(request):
         else:
             print('someone tried login and failed')
             print('username : {} and password {}'.format(username, password))
-            return HttpResponse("invalid comb of username password")
+            return render(request,'basicapp/invalidLogin.html')
     else:
         return render(request, 'basicapp/login.html', {})
 
@@ -75,10 +75,15 @@ def index(request):
     #attempting to make one of all query
     #interestedNewsfeed = NewsfeedScore.objects.filter(Q(category=n3[0].interest_name) | Q(category=n3[1].interest_name) | Q(category=n3[2].interest_name)).filter(score__gte=0.85)
     print(interestOne)
-    n1 = User_Table.objects.filter(user_name__username__icontains=request.user.username)
-    return render(request, 'basicapp/index.html', {'user_record':n1, 'first_two_news_feed':n2[0:2], 'interestOneFeed':interestOne, 'interestTwoFeed':interestTwo, 'interestThreeFeed':interestThree, 'rest_news_feed':n2[2:]})
 
-@login_required
+
+    n1 = User_Table.objects.filter(user_name__username__icontains=request.user.username)
+    params = {'user_record': n1, 'first_two_news_feed': n2[0:2], 'interestOneFeed': interestOne,
+              'interestTwoFeed': interestTwo,
+              'interestThreeFeed': interestThree, 'rest_news_feed': n2[2:]}
+    return render(request, 'basicapp/index.html', params)
+
+#@login_required
 def instituteAdmin(request):
     n2= Newsfeed.objects.all()
     return render(request, 'basicapp/instituteAdmin.html',{'news_feed':n2,})
@@ -238,3 +243,31 @@ def add_comment_to_post(request, pk):
     else:
         form = CommentForm()
     return render(request, 'basicapp/add_comment_to_post.html', {'form': form})
+
+
+# Views for Newer Pages By Me
+#@login_required
+def adduser(request):
+    if request.method == 'POST':
+        user_form = UserForm(data = request.POST)
+        add_user_form = addUserForm(data = request.POST)
+
+        if user_form.is_valid() and add_user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = add_user_form.save(commit=False)
+            profile.user_name = user
+            profile.access_type = 'NormalUser'
+            profile.save()
+
+        else:
+            print(user_form.errors, add_user_form.errors)
+    else:
+        user_form = UserForm()
+        add_user_form = addUserForm()
+
+    return render(request, 'basicapp/adduser.html', {'user_form':user_form, 'add_user_form':add_user_form})
+
+
