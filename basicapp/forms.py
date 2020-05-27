@@ -27,9 +27,9 @@ class addUserForm(forms.ModelForm):
 class addNewsFeedForm(forms.ModelForm):
     class Meta():
         model = Newsfeed
-        fields = {'description', 'news_feed_type','intended_for'}
+        fields = {'description', 'news_feed_type','intended_for','image'}
 
 class CommentForm(forms.ModelForm):
     class Meta():
         model = Comment
-        fields = {'user_name', 'description',}
+        fields = {'description',}
