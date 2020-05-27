@@ -48,15 +48,16 @@
 			<div class="userProfile" >
 				<table style="border:0px solid black;width:100%">
 					<tr>
+						<!--D:\FYP\Fetter\media\user\profile_image-->
 						<td style="width:25%;">Username:</td>
-						<td>{{ request.user.username }}</td>
+						<td>{{ user.username }}</td>
 					</tr>
 					<tr>
 						<td style="width:25%;">Profile Pic:</td>
 						<td>
 							<br>
 								<!-- Image Link : User Profile Pic -->
-								<img src="{ % user.profile_pic_path %}" style="width:100px;height:100px;">
+								<img src="/media/user/profile_image/734.jpg" width="220" height="220">
 								<br>
 								<br>
 						</td>
