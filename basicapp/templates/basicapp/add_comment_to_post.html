@@ -1,13 +1,14 @@
+{% extends 'basicapp/base.html' %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+  {% block body_block %}
     <form  method="POST">
         {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit"> Send </button>
+      <button type="submit"> Comment </button>
     </form>
-  </body>
+  {% endblock %}
 </html>
